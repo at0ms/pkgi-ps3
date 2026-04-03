@@ -386,7 +386,7 @@ static void pkgi_do_main(pkgi_input* input)
 
         if (i == selected_item)
         {
-            pkgi_draw_fill_rect_z(0, y + 5, PKGI_FONT_Z, VITA_WIDTH, font_height + PKGI_MAIN_ROW_PADDING - 1, PKGI_COLOR_SELECTED_BACKGROUND);
+            pkgi_draw_fill_rect_z(0, y + 1, PKGI_FONT_Z, VITA_WIDTH, font_height + PKGI_MAIN_ROW_PADDING - 1, PKGI_COLOR_SELECTED_BACKGROUND);
         }
         uint32_t color = PKGI_COLOR_TEXT;
 
