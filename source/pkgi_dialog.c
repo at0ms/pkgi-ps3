@@ -238,7 +238,7 @@ void pkgi_do_dialog(pkgi_input* input)
 
     if (local_width != 0 && local_height != 0)
     {
-        pkgi_draw_fill_rect_z((VITA_WIDTH - local_width) / 2, (VITA_HEIGHT - local_height) / 2, PKGI_MENU_Z, local_width, local_height, PKGI_COLOR_MENU_BACKGROUND);
+        pkgi_draw_fill_rect_z((VITA_WIDTH - local_width) / 2, (VITA_HEIGHT - local_height) / 2, PKGI_MENU_Z, local_width, local_height, PKGI_COLOR_DIALOG_BACKGROUND);
         pkgi_draw_rect_z((VITA_WIDTH - local_width) / 2, (VITA_HEIGHT - local_height) / 2, PKGI_MENU_Z, local_width, local_height, PKGI_COLOR_MENU_BORDER);
     }
 
