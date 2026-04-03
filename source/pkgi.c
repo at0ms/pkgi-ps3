@@ -270,7 +270,9 @@ static void pkgi_do_main(pkgi_input* input)
         if (input->active & PKGI_BUTTON_SELECT)
         {
             input->pressed &= ~PKGI_BUTTON_SELECT;
-            pkgi_dialog_message("\xE2\x98\x85  PKGi v" PKGI_VERSION "  \xE2\x98\x85", "PlayStation 3 version by Bucanero\n\nFork by at0ms\n\nhttps://github.com/at0ms/pkgi-ps3/");
+            pkgi_dialog_message("\xE2\x98\x85  PKGi v" PKGI_VERSION "  \xE2\x98\x85", 
+                                    "             PlayStation 3 version by Bucanero (Fork by at0ms)\n\n"
+                                    "           https://github.com/at0ms/pkgi-ps3/");
         }
 
         if (input->active & PKGI_BUTTON_L2)
@@ -384,7 +386,7 @@ static void pkgi_do_main(pkgi_input* input)
 
         if (i == selected_item)
         {
-            pkgi_draw_fill_rect_z(0, y, PKGI_FONT_Z, VITA_WIDTH, font_height + PKGI_MAIN_ROW_PADDING - 1, PKGI_COLOR_SELECTED_BACKGROUND);
+            pkgi_draw_fill_rect_z(0, y + 5, PKGI_FONT_Z, VITA_WIDTH, font_height + PKGI_MAIN_ROW_PADDING - 1, PKGI_COLOR_SELECTED_BACKGROUND);
         }
         uint32_t color = PKGI_COLOR_TEXT;
 
@@ -461,7 +463,7 @@ static void pkgi_do_main(pkgi_input* input)
             uint32_t height = max_items * avail_height / db_count;
             uint32_t start = first_item * (avail_height - (height < min_height ? min_height : 0)) / db_count;
             height = max32(height, min_height);
-            pkgi_draw_fill_rect_z(VITA_WIDTH - (PKGI_MAIN_HMARGIN + PKGI_MAIN_SCROLL_WIDTH), font_height + PKGI_MAIN_HLINE_EXTRA + PKGI_MAIN_VMARGIN + start + 6, PKGI_FONT_Z, PKGI_MAIN_SCROLL_WIDTH, height, PKGI_COLOR_SCROLL_BAR);
+            pkgi_draw_fill_rect_z(VITA_WIDTH - (PKGI_MAIN_HMARGIN + PKGI_MAIN_SCROLL_WIDTH), font_height + PKGI_MAIN_HLINE_EXTRA + PKGI_MAIN_VMARGIN + start, PKGI_FONT_Z, PKGI_MAIN_SCROLL_WIDTH, height, PKGI_COLOR_SCROLL_BAR);
         }
     }
 
