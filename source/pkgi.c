@@ -272,7 +272,8 @@ static void pkgi_do_main(pkgi_input* input)
             input->pressed &= ~PKGI_BUTTON_SELECT;
             pkgi_dialog_message("\xE2\x98\x85  PKGi PS3 v" PKGI_VERSION "  \xE2\x98\x85",
                                 "             PlayStation 3 version by Bucanero\n\n"
-                                "           https://github.com/bucanero/pkgi-ps3/");
+                                "                     Fork by at0ms\n\n"
+                                "           https://github.com/at0ms/pkgi-ps3/");
         }
 
         if (input->active & PKGI_BUTTON_L2)
@@ -700,20 +701,9 @@ static void pkgi_load_language(const char* lang)
     mini18n_set_locale(path);
 }
 
-static int pkgi_security_check()
-{
-    return 0;
-}
-
 int main(int argc, const char* argv[])
 {
     pkgi_start();
-
-    if (!pkgi_security_check())
-    {
-        pkgi_msg_dialog(MDIALOG_OK, "ERROR: Integrity check failed!\n\nGet the latest official release from:\nhttps://github.com/bucanero/pkgi-ps3/");
-        return 0;
-    }
 
     pkgi_load_config(&config, (char*) &refresh_url, sizeof(refresh_url[0]));
     if (config.music)
