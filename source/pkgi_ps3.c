@@ -189,7 +189,7 @@ static void pkgi_start_debug_log(void)
 {
 #ifdef PKGI_ENABLE_LOGGING
     dbglogger_init();
-    LOG("PKGi PS3 logging initialized");
+    LOG("PKGi logging initialized");
 
     dbglogger_failsafe("9999");
 #endif

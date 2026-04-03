@@ -285,7 +285,7 @@ static int create_dummy_pkg(void)
 	pkgi_snprintf(dst, sizeof(dst), PKGI_QUEUE_FOLDER "/%d/%s", queue_task_id, root);
 
 	LOG("Creating empty file '%s'...", dst);
-	if (!pkgi_save(dst, "PKGi PS3", 8))
+	if (!pkgi_save(dst, "PKGi", 8))
 		return 0;
 
 	download_offset=0;

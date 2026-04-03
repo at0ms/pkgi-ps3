@@ -264,13 +264,13 @@ static void pkgi_do_main(pkgi_input* input)
         if (input->active & pkgi_cancel_button())
         {
             input->pressed &= ~pkgi_cancel_button();
-            pkgi_dialog_ok_cancel("\xE2\x98\x85  PKGi PS3 v" PKGI_VERSION "  \xE2\x98\x85", _("Exit to XMB?"), &cb_dialog_exit);
+            pkgi_dialog_ok_cancel("\xE2\x98\x85  PKGi v" PKGI_VERSION "  \xE2\x98\x85", _("Exit to XMB?"), &cb_dialog_exit);
         }
 
         if (input->active & PKGI_BUTTON_SELECT)
         {
             input->pressed &= ~PKGI_BUTTON_SELECT;
-            pkgi_dialog_message("\xE2\x98\x85  PKGi PS3 v" PKGI_VERSION "  \xE2\x98\x85",
+            pkgi_dialog_message("\xE2\x98\x85  PKGi v" PKGI_VERSION "  \xE2\x98\x85",
                                 "             PlayStation 3 version by Bucanero\n\n"
                                 "                     Fork by at0ms\n\n"
                                 "           https://github.com/at0ms/pkgi-ps3/");
@@ -534,7 +534,7 @@ static void pkgi_do_refresh(void)
 static void pkgi_do_head(void)
 {
     char title[256];
-    pkgi_snprintf(title, sizeof(title), "PKGi PS3 v%s - %s", PKGI_VERSION, content_type_str(config.content));
+    pkgi_snprintf(title, sizeof(title), "PKGi v%s - %s", PKGI_VERSION, content_type_str(config.content));
     pkgi_draw_text(PKGI_MAIN_HMARGIN, PKGI_MAIN_VMARGIN, PKGI_COLOR_TEXT_HEAD, title);
 
     pkgi_draw_fill_rect(0, font_height + PKGI_MAIN_VMARGIN, VITA_WIDTH, PKGI_MAIN_HLINE_HEIGHT, PKGI_COLOR_HLINE);
@@ -658,7 +658,7 @@ static void pkgi_update_check_thread(void)
 
     json_object * jobj = json_tokener_parse(buffer);
 
-    if ((value = json_parse(jobj, "name")) == NULL || !pkgi_memequ("PKGi PS3", value, 8) || pkgi_stricmp(PKGI_VERSION, value+10) == 0)
+    if ((value = json_parse(jobj, "name")) == NULL || !pkgi_memequ("PKGi", value, 8) || pkgi_stricmp(PKGI_VERSION, value+10) == 0)
     {
         LOG("no new version available");
         pkgi_thread_exit();
@@ -677,7 +677,7 @@ static void pkgi_update_check_thread(void)
 
     DbItem update_item = {
         .content = "UP0001-NP00PKGI3_00-0000000000000000",
-        .name    = "PKGi PS3 Update",
+        .name    = "PKGi Update",
         .url     = value,
     };
 
@@ -685,7 +685,7 @@ static void pkgi_update_check_thread(void)
     
     if (pkgi_download(&update_item, 0) && install(update_item.content))
     {
-        pkgi_dialog_message(update_item.name, _("Successfully downloaded PKGi PS3 update"));
+        pkgi_dialog_message(update_item.name, _("Successfully downloaded PKGi update"));
         LOG("update downloaded!");
     }
 
