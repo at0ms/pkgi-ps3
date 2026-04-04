@@ -168,8 +168,8 @@ int pkgi_do_menu(pkgi_input* input)
 
     if (menu_width != 0)
     {
-        pkgi_draw_fill_rect_z(VITA_WIDTH - (menu_width + PKGI_MAIN_HMARGIN), PKGI_MAIN_VMARGIN, PKGI_MENU_Z, menu_width, PKGI_MENU_HEIGHT, PKGI_COLOR_MENU_BACKGROUND);
-        pkgi_draw_rect_z(VITA_WIDTH - (menu_width + PKGI_MAIN_HMARGIN), PKGI_MAIN_VMARGIN, PKGI_MENU_Z, menu_width, PKGI_MENU_HEIGHT, PKGI_COLOR_MENU_BORDER);
+        pkgi_draw_fill_rect_z(PS3_WIDTH - (menu_width + PKGI_MAIN_HMARGIN), PKGI_MAIN_VMARGIN, PKGI_MENU_Z, menu_width, PKGI_MENU_HEIGHT, PKGI_COLOR_MENU_BACKGROUND);
+        pkgi_draw_rect_z(PS3_WIDTH - (menu_width + PKGI_MAIN_HMARGIN), PKGI_MAIN_VMARGIN, PKGI_MENU_Z, menu_width, PKGI_MENU_HEIGHT, PKGI_COLOR_MENU_BORDER);
     }
 
     if (input->active & PKGI_BUTTON_UP)
@@ -308,7 +308,7 @@ int pkgi_do_menu(pkgi_input* input)
             y += font_height;
         }
 
-        int x = VITA_WIDTH - (pkgi_menu_width + PKGI_MAIN_HMARGIN) + PKGI_MENU_LEFT_PADDING;
+        int x = PS3_WIDTH - (pkgi_menu_width + PKGI_MAIN_HMARGIN) + PKGI_MENU_LEFT_PADDING;
 
         char text[64];
         if (type == MenuSearch || type == MenuSearchClear || type == MenuText || type == MenuRefresh)

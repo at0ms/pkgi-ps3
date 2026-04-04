@@ -91,7 +91,7 @@ static int install(const char* content)
 
     if (!ok)
     {
-        pkgi_dialog_error(_("Installation failed"));
+        pkgi_dialog_error(_("Installation failed."));
         return 0;
     }
 
@@ -115,11 +115,11 @@ static void pkgi_download_thread(void)
         if (!config.dl_mode_background)
         {
             install(item->content);
-            pkgi_dialog_message(item->name, _("Successfully downloaded"));
+            pkgi_dialog_message(item->name, _("Successfully downloaded."));
         }
         else
         {
-            pkgi_dialog_message(item->name, _("Task successfully queued (reboot to start)"));
+            pkgi_dialog_message(item->name, _("Task successfully queued (reboot to start)."));
         }
         LOG("download completed!");
     }
@@ -182,7 +182,7 @@ int pkgi_check_free_space(uint64_t size)
     if (size > free + 1024 * 1024)
     {
         char error[256];
-        pkgi_snprintf(error, sizeof(error), _("pkg requires %u %s free space, but only %u %s available"),
+        pkgi_snprintf(error, sizeof(error), _("Pkg requires %u %s free space, but only %u %s available"),
             friendly_size(size), friendly_size_str(size),
             friendly_size(free), friendly_size_str(free)
         );
@@ -271,8 +271,8 @@ static void pkgi_do_main(pkgi_input* input)
         {
             input->pressed &= ~PKGI_BUTTON_SELECT;
             pkgi_dialog_message("\xE2\x98\x85  PKGi v" PKGI_VERSION "  \xE2\x98\x85", 
-                                    "                 PKGi Fork by at0ms\n\n"
-                                    "           https://github.com/at0ms/pkgi-ps3/");
+                                    "                       PKGi Fork by at0ms\n\n"
+                                    "                https://github.com/at0ms/pkgi-ps3/");
         }
 
         if (input->active & PKGI_BUTTON_L2)
@@ -386,7 +386,7 @@ static void pkgi_do_main(pkgi_input* input)
 
         if (i == selected_item)
         {
-            pkgi_draw_fill_rect_z(0, y - 2, PKGI_FONT_Z, VITA_WIDTH, font_height + PKGI_MAIN_ROW_PADDING - 1, PKGI_COLOR_SELECTED_BACKGROUND);
+            pkgi_draw_fill_rect_z(0, y - 2, PKGI_FONT_Z, PS3_WIDTH, font_height + PKGI_MAIN_ROW_PADDING - 1, PKGI_COLOR_SELECTED_BACKGROUND);
         }
         uint32_t color = PKGI_COLOR_TEXT;
 
@@ -403,7 +403,7 @@ static void pkgi_do_main(pkgi_input* input)
         pkgi_friendly_size(size_str, sizeof(size_str), item->size);
         int sizew = pkgi_text_width(size_str);
 
-        pkgi_clip_set(0, y, VITA_WIDTH, line_height);
+        pkgi_clip_set(0, y, PS3_WIDTH, line_height);
         pkgi_draw_text(col_titleid, y, color, titleid);
         const char* region;
         switch (pkgi_get_region(item->content))
@@ -423,21 +423,21 @@ static void pkgi_do_main(pkgi_input* input)
         {
             pkgi_draw_text(col_installed, y, color, PKGI_UTF8_INSTALLED);
         }
-        pkgi_draw_text(VITA_WIDTH - (PKGI_MAIN_SCROLL_WIDTH + PKGI_MAIN_SCROLL_PADDING + PKGI_MAIN_HMARGIN + sizew), y, color, size_str);
+        pkgi_draw_text(PS3_WIDTH - (PKGI_MAIN_SCROLL_WIDTH + PKGI_MAIN_SCROLL_PADDING + PKGI_MAIN_HMARGIN + sizew), y, color, size_str);
         pkgi_clip_remove();
 
-        pkgi_clip_set(col_name, y, VITA_WIDTH - PKGI_MAIN_SCROLL_WIDTH - PKGI_MAIN_SCROLL_PADDING - PKGI_MAIN_COLUMN_PADDING - sizew - col_name, line_height);
+        pkgi_clip_set(col_name, y, PS3_WIDTH - PKGI_MAIN_SCROLL_WIDTH - PKGI_MAIN_SCROLL_PADDING - PKGI_MAIN_COLUMN_PADDING - sizew - col_name, line_height);
         pkgi_draw_text_ttf(0, 0, PKGI_FONT_Z, color, item->name);
         pkgi_clip_remove();
 
         y += font_height + PKGI_MAIN_ROW_PADDING;
-        if (y > VITA_HEIGHT - (font_height + PKGI_MAIN_HLINE_EXTRA*6 + PKGI_MAIN_VMARGIN))
+        if (y > PS3_HEIGHT - (font_height + PKGI_MAIN_HLINE_EXTRA*6 + PKGI_MAIN_VMARGIN))
         {
             break;
         }
-        else if (y + font_height > VITA_HEIGHT - (font_height + PKGI_MAIN_HLINE_EXTRA))
+        else if (y + font_height > PS3_HEIGHT - (font_height + PKGI_MAIN_HLINE_EXTRA))
         {
-            line_height = (VITA_HEIGHT - (font_height + PKGI_MAIN_HLINE_EXTRA)) - (y + 1);
+            line_height = (PS3_HEIGHT - (font_height + PKGI_MAIN_HLINE_EXTRA)) - (y + 1);
             if (line_height < PKGI_MAIN_ROW_PADDING)
             {
                 break;
@@ -450,7 +450,7 @@ static void pkgi_do_main(pkgi_input* input)
         const char* text = _("No items!");
 
         int w = pkgi_text_width(text);
-        pkgi_draw_text((VITA_WIDTH - w) / 2, VITA_HEIGHT / 2, PKGI_COLOR_TEXT, text);
+        pkgi_draw_text((PS3_WIDTH - w) / 2, PS3_HEIGHT / 2, PKGI_COLOR_TEXT, text);
     }
 
     // scroll-bar
@@ -463,7 +463,7 @@ static void pkgi_do_main(pkgi_input* input)
             uint32_t height = max_items * avail_height / db_count;
             uint32_t start = first_item * (avail_height - (height < min_height ? min_height : 0)) / db_count;
             height = max32(height, min_height);
-            pkgi_draw_fill_rect_z(VITA_WIDTH - (PKGI_MAIN_HMARGIN + PKGI_MAIN_SCROLL_WIDTH), font_height + PKGI_MAIN_HLINE_EXTRA + PKGI_MAIN_VMARGIN + start, PKGI_FONT_Z, PKGI_MAIN_SCROLL_WIDTH, height, PKGI_COLOR_SCROLL_BAR);
+            pkgi_draw_fill_rect_z(PS3_WIDTH - (PKGI_MAIN_HMARGIN + PKGI_MAIN_SCROLL_WIDTH), font_height + PKGI_MAIN_HLINE_EXTRA + PKGI_MAIN_VMARGIN + start, PKGI_FONT_Z, PKGI_MAIN_SCROLL_WIDTH, height, PKGI_COLOR_SCROLL_BAR);
         }
     }
 
@@ -476,7 +476,7 @@ static void pkgi_do_main(pkgi_input* input)
         if (!pkgi_check_free_space(item->size))
         {
             LOG("[%.9s] %s - no free space", item->content + 7, item->name);
-            pkgi_dialog_error(_("Not enough free space on HDD"));
+            pkgi_dialog_error(_("Not enough free space on HDD."));
         }
         else if (item->presence == PresenceInstalled)
         {
@@ -527,7 +527,7 @@ static void pkgi_do_refresh(void)
     }
 
     int w = pkgi_text_width(text);
-    pkgi_draw_text((VITA_WIDTH - w) / 2, VITA_HEIGHT / 2, PKGI_COLOR_TEXT, text);
+    pkgi_draw_text((PS3_WIDTH - w) / 2, PS3_HEIGHT / 2, PKGI_COLOR_TEXT, text);
 }
 
 static void pkgi_do_head(void)
@@ -536,14 +536,14 @@ static void pkgi_do_head(void)
     pkgi_snprintf(title, sizeof(title), "PKGi v%s - %s", PKGI_VERSION, content_type_str(config.content));
     pkgi_draw_text(PKGI_MAIN_HMARGIN, PKGI_MAIN_VMARGIN, PKGI_COLOR_TEXT_HEAD, title);
 
-    pkgi_draw_fill_rect(0, font_height + PKGI_MAIN_VMARGIN, VITA_WIDTH, PKGI_MAIN_HLINE_HEIGHT, PKGI_COLOR_HLINE);
+    pkgi_draw_fill_rect(0, font_height + PKGI_MAIN_VMARGIN, PS3_WIDTH, PKGI_MAIN_HLINE_HEIGHT, PKGI_COLOR_HLINE);
 
     char battery[256];
     pkgi_snprintf(battery, sizeof(battery), "CPU: %u""\xf8""C RSX: %u""\xf8""C", pkgi_get_temperature(0), pkgi_get_temperature(1));
 
     uint32_t color = pkgi_temperature_is_high() ? PKGI_COLOR_TEMP_HIGH : PKGI_COLOR_TEMP_NORMAL;
     int rightw = pkgi_text_width(battery);
-    pkgi_draw_text(VITA_WIDTH - PKGI_MAIN_HLINE_EXTRA - (rightw + PKGI_MAIN_HMARGIN), PKGI_MAIN_VMARGIN, color, battery);
+    pkgi_draw_text(PS3_WIDTH - PKGI_MAIN_HLINE_EXTRA - (rightw + PKGI_MAIN_HMARGIN), PKGI_MAIN_VMARGIN, color, battery);
 
     if (search_active)
     {
@@ -553,15 +553,15 @@ static void pkgi_do_head(void)
 
         pkgi_snprintf(text, sizeof(text), ">> %s <<", search_text);
 
-        pkgi_clip_set(left, PKGI_MAIN_VMARGIN, VITA_WIDTH - right - left, font_height + PKGI_MAIN_HLINE_EXTRA);
-        pkgi_draw_text((VITA_WIDTH - pkgi_text_width(text)) / 2, PKGI_MAIN_VMARGIN, PKGI_COLOR_TEXT_TAIL, text);
+        pkgi_clip_set(left, PKGI_MAIN_VMARGIN, PS3_WIDTH - right - left, font_height + PKGI_MAIN_HLINE_EXTRA);
+        pkgi_draw_text((PS3_WIDTH - pkgi_text_width(text)) / 2, PKGI_MAIN_VMARGIN, PKGI_COLOR_TEXT_TAIL, text);
         pkgi_clip_remove();
     }
 }
 
 static void pkgi_do_tail(void)
 {
-    pkgi_draw_fill_rect_z(0, bottom_y - font_height/2, PKGI_FONT_Z, VITA_WIDTH, PKGI_MAIN_HLINE_HEIGHT, PKGI_COLOR_HLINE);
+    pkgi_draw_fill_rect_z(0, bottom_y - font_height/2, PKGI_FONT_Z, PS3_WIDTH, PKGI_MAIN_HLINE_HEIGHT, PKGI_COLOR_HLINE);
 
     uint32_t count = pkgi_db_count();
     uint32_t total = pkgi_db_total();
@@ -584,7 +584,7 @@ static void pkgi_do_tail(void)
     pkgi_snprintf(free_str, sizeof(free_str), "%s: %s", _("Free"), size);
 
     int rightw = pkgi_text_width(free_str);
-    pkgi_draw_text(VITA_WIDTH - (PKGI_MAIN_HLINE_EXTRA + PKGI_MAIN_HMARGIN + rightw), bottom_y, PKGI_COLOR_TEXT_TAIL, free_str);
+    pkgi_draw_text(PS3_WIDTH - (PKGI_MAIN_HLINE_EXTRA + PKGI_MAIN_HMARGIN + rightw), bottom_y, PKGI_COLOR_TEXT_TAIL, free_str);
 
     int left = pkgi_text_width(text) + PKGI_MAIN_TEXT_PADDING;
     int right = rightw + PKGI_MAIN_TEXT_PADDING;
@@ -598,14 +598,14 @@ static void pkgi_do_tail(void)
         pkgi_snprintf(text, sizeof(text), "%s %s  " PKGI_UTF8_T " %s  " PKGI_UTF8_S " %s  %s %s", pkgi_get_ok_str(), _("Download"), _("Menu"), _("Details"), pkgi_get_cancel_str(), _("Exit"));
     }
 
-    pkgi_clip_set(left, bottom_y, VITA_WIDTH - right - left, VITA_HEIGHT - bottom_y);
-    pkgi_draw_text_z((VITA_WIDTH - pkgi_text_width(text)) / 2, bottom_y, PKGI_FONT_Z, PKGI_COLOR_TEXT_TAIL, text);
+    pkgi_clip_set(left, bottom_y, PS3_WIDTH - right - left, PS3_HEIGHT - bottom_y);
+    pkgi_draw_text_z((PS3_WIDTH - pkgi_text_width(text)) / 2, bottom_y, PKGI_FONT_Z, PKGI_COLOR_TEXT_TAIL, text);
     pkgi_clip_remove();
 }
 
 static void pkgi_do_error(void)
 {
-    pkgi_draw_text((VITA_WIDTH - pkgi_text_width(error_state)) / 2, VITA_HEIGHT / 2, PKGI_COLOR_TEXT_ERROR, error_state);
+    pkgi_draw_text((PS3_WIDTH - pkgi_text_width(error_state)) / 2, PS3_HEIGHT / 2, PKGI_COLOR_TEXT_ERROR, error_state);
 }
 
 static void reposition(void)
@@ -684,7 +684,7 @@ static void pkgi_update_check_thread(void)
     
     if (pkgi_download(&update_item, 0) && install(update_item.content))
     {
-        pkgi_dialog_message(update_item.name, _("Successfully downloaded PKGi update"));
+        pkgi_dialog_message(update_item.name, _("Successfully downloaded PKGi update."));
         LOG("update downloaded!");
     }
 
@@ -714,8 +714,8 @@ int main(int argc, const char* argv[])
     pkgi_dialog_init();
     
     font_height = pkgi_text_height("M");
-    avail_height = VITA_HEIGHT - 2 * (font_height + PKGI_MAIN_HLINE_EXTRA*2 + PKGI_MAIN_VMARGIN);
-    bottom_y = VITA_HEIGHT - (PKGI_MAIN_VMARGIN + font_height);
+    avail_height = PS3_HEIGHT - 2 * (font_height + PKGI_MAIN_HLINE_EXTRA*2 + PKGI_MAIN_VMARGIN);
+    bottom_y = PS3_HEIGHT - (PKGI_MAIN_VMARGIN + font_height);
 
     state = StateRefreshing;
     pkgi_start_thread("refresh_thread", &pkgi_refresh_thread);

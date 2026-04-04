@@ -11,7 +11,6 @@
 #include <dirent.h>
 #include <mini18n.h>
 
-
 #define PDB_HDR_FILENAME	"\x00\x00\x00\xCB"
 #define PDB_HDR_DATETIME	"\x00\x00\x00\xCC"
 #define PDB_HDR_URL			"\x00\x00\x00\xCA"
@@ -21,7 +20,6 @@
 #define PDB_HDR_CONTENT		"\x00\x00\x00\xD9"
 #define PDB_HDR_UNUSED		"\x00\x00\x00\x00"
 #define PDB_HDR_DLSIZE		"\x00\x00\x00\xD0"
-
 
 static char root[256];
 static char resume_file[256];
@@ -49,7 +47,6 @@ static uint32_t info_update;
 
 static uint32_t	queue_task_id 	= 10000002;
 static uint32_t	install_task_id = 80000002;
-
 
 static uint32_t get_task_dir_id(const char* dir, uint32_t tid)
 {
@@ -309,18 +306,18 @@ static int queue_pkg_task(void)
     http = pkgi_http_get(db_item->url, initial_offset);
     if (!http)
     {
-        pkgi_dialog_error(_("Could not send HTTP request"));
+        pkgi_dialog_error(_("Could not send HTTP request."));
         return 0;
     }
 
     if (!pkgi_http_content_size(db_item->url, &http_length))
     {
-        pkgi_dialog_error(_("HTTP request failed"));
+        pkgi_dialog_error(_("HTTP request failed."));
         return 0;
     }
     if (http_length < 0)
     {
-        pkgi_dialog_error(_("HTTP response has unknown length"));
+        pkgi_dialog_error(_("HTTP response has unknown length."));
         return 0;
     }
 
@@ -329,7 +326,7 @@ static int queue_pkg_task(void)
 
     if (!pkgi_check_free_space(http_length))
     {
-        pkgi_dialog_error(_("Not enough free space on HDD"));
+        pkgi_dialog_error(_("Not enough free space on HDD."));
         return 0;
     }
 
@@ -383,12 +380,12 @@ static int download_data(void)
         int64_t http_length;
         if (!pkgi_http_content_size(db_item->url, &http_length))
         {
-            pkgi_dialog_error(_("HTTP request failed"));
+            pkgi_dialog_error(_("HTTP request failed."));
             return 0;
         }
         if (http_length < 0)
         {
-            pkgi_dialog_error(_("HTTP response has unknown length"));
+            pkgi_dialog_error(_("HTTP response has unknown length."));
             return 0;
         }
 
@@ -398,14 +395,14 @@ static int download_data(void)
 
         if (!pkgi_check_free_space(http_length))
         {
-            pkgi_dialog_error(_("Not enough free space on HDD"));
+            pkgi_dialog_error(_("Not enough free space on HDD."));
             return 0;
         }
 
         http = pkgi_http_get(db_item->url, initial_offset);
         if (!http)
         {
-            pkgi_dialog_error(_("Could not send HTTP request"));
+            pkgi_dialog_error(_("Could not send HTTP request."));
             return 0;
         }
 
@@ -419,7 +416,7 @@ static int download_data(void)
 
         if (!pkgi_dialog_is_cancelled())
         {
-            pkgi_dialog_error(_("HTTP download error"));
+            pkgi_dialog_error(_("HTTP download error."));
         }
         return 0;
     }
@@ -438,7 +435,7 @@ static int create_file(void)
     if (!pkgi_mkdirs(folder))
     {
         char error[256];
-        pkgi_snprintf(error, sizeof(error), "%s %s", _("cannot create folder"), folder);
+        pkgi_snprintf(error, sizeof(error), "%s %s", _("Cannot create folder."), folder);
         pkgi_dialog_error(error);
         return 0;
     }
@@ -448,7 +445,7 @@ static int create_file(void)
     if (!item_file)
     {
         char error[256];
-        pkgi_snprintf(error, sizeof(error), "%s %s", _("cannot create file"), item_name);
+        pkgi_snprintf(error, sizeof(error), "%s %s", _("Cannot create file."), item_name);
         pkgi_dialog_error(error);
         return 0;
     }
@@ -463,7 +460,7 @@ static int resume_partial_file(void)
     if (!item_file)
     {
         char error[256];
-        pkgi_snprintf(error, sizeof(error), "%s %s", _("cannot resume file"), item_name);
+        pkgi_snprintf(error, sizeof(error), "%s %s", _("Cannot resume file."), item_name);
         pkgi_dialog_error(error);
         return 0;
     }
@@ -523,7 +520,7 @@ static int check_integrity(const uint8_t* digest)
         pkgi_rm(item_path);
         pkgi_rm(resume_file);
 
-        pkgi_dialog_error(_("pkg integrity failed, try downloading again"));
+        pkgi_dialog_error(_("PKG integrity failed, try downloading again."));
         return 0;
     }
 
@@ -534,7 +531,7 @@ static int check_integrity(const uint8_t* digest)
 static int create_rap(const char* contentid, const uint8_t* rap)
 {
     LOG("creating %s.rap", contentid);
-    pkgi_dialog_update_progress(_("Creating RAP file"), NULL, NULL, 1.f);
+    pkgi_dialog_update_progress(_("Creating RAP file."), NULL, NULL, 1.f);
 
     char path[256];
     pkgi_snprintf(path, sizeof(path), "%s/%s.rap", PKGI_RAP_FOLDER, contentid);
@@ -542,7 +539,7 @@ static int create_rap(const char* contentid, const uint8_t* rap)
     if (!pkgi_save(path, rap, PKGI_RAP_SIZE))
     {
         char error[256];
-        pkgi_snprintf(error, sizeof(error), "%s %s.rap", _("Cannot save"), contentid);
+        pkgi_snprintf(error, sizeof(error), "%s %s.rap", _("Cannot save."), contentid);
         pkgi_dialog_error(error);
         return 0;
     }
@@ -582,12 +579,12 @@ static int create_rif(const char* contentid, const uint8_t* rap)
     }
 
     LOG("creating %s.rif", contentid);
-    pkgi_dialog_update_progress(_("Creating RIF file"), NULL, NULL, 1.f);
+    pkgi_dialog_update_progress(_("Creating RIF file."), NULL, NULL, 1.f);
 
     if (!rap2rif(rap, contentid, lic_path))
     {
         char error[256];
-        pkgi_snprintf(error, sizeof(error), "%s %s.rif", _("Cannot save"), contentid);
+        pkgi_snprintf(error, sizeof(error), "%s %s.rif", _("Cannot save."), contentid);
         pkgi_dialog_error(error);
         return 0;
     }
@@ -638,7 +635,7 @@ int pkgi_download(const DbItem* item, const int background_dl)
         if (!create_rif(item->content, item->rap)) goto finish;
     }
 
-    pkgi_dialog_update_progress(_("Downloading icon"), NULL, NULL, 1.f);
+    pkgi_dialog_update_progress(_("Downloading icon."), NULL, NULL, 1.f);
     if (!pkgi_download_icon(item->content)) goto finish;
 
     if (background_dl)

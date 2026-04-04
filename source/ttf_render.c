@@ -1,6 +1,4 @@
-
 // you need the Oopo ps3libraries to work with freetype
-
 #include <ft2build.h>
 #include <freetype/freetype.h> 
 #include <freetype/ftglyph.h>
@@ -9,7 +7,6 @@
 /******************************************************************************************************************************************************/
 /* TTF functions to load and convert fonts                                                                                                             */
 /******************************************************************************************************************************************************/
-
 static int ttf_inited = 0;
 
 static FT_Library freetype;
@@ -18,7 +15,6 @@ static int f_face[4] = {0, 0, 0, 0};
 
 int TTFLoadFont(int set, char * path, void * from_memory, int size_from_memory)
 {
-   
     if(!ttf_inited)
         FT_Init_FreeType(&freetype);
     ttf_inited = 1;
@@ -29,7 +25,7 @@ int TTFLoadFont(int set, char * path, void * from_memory, int size_from_memory)
         if(FT_New_Face(freetype, path, 0, &face[set])<0) return -1;
     } else {
         if(FT_New_Memory_Face(freetype, from_memory, size_from_memory, 0, &face[set])) return -1;
-        }
+    }
 
     f_face[set] = 1;
 
@@ -37,7 +33,6 @@ int TTFLoadFont(int set, char * path, void * from_memory, int size_from_memory)
 }
 
 /* release all */
-
 void TTFUnloadFont()
 {
    if(!ttf_inited) return;
@@ -57,7 +52,6 @@ bitmap: u8 bitmap passed to render the character character (max 256 x 256 x 1 (8
 y_correction : the Y correction to display the character correctly in the screen
 
 */
-
 void TTF_to_Bitmap(u8 chr, u8 * bitmap, short *w, short *h, short *y_correction)
 {
     if(f_face[0]) FT_Set_Pixel_Sizes(face[0], (*w), (*h));
@@ -190,11 +184,11 @@ int Render_String_UTF8(u16 * bitmap, int w, int h, u8 *string, int sw, int sh)
 
         if(slot) posx+= slot->bitmap.width;
     }
+
     return posx;
 }
 
 // constructor dinamico de fuentes 32 x 32
-
 typedef struct ttf_dyn {
     u32 ttf;
     u16 *text;
@@ -220,7 +214,6 @@ static int Win_Y_ttf = 0;
 static int Win_W_ttf = 848;
 static int Win_H_ttf = 512;
 
-
 static u32 Win_flag = 0;
 
 void set_ttf_window(int x, int y, int width, int height, u32 mode)
@@ -232,7 +225,6 @@ void set_ttf_window(int x, int y, int width, int height, u32 mode)
     Win_flag = mode;
     Y_ttf = 0.0f;
     Z_ttf = 0.0f;
-   
 }
 
 u16 * init_ttf_table(u16 *texture)
@@ -248,7 +240,6 @@ u16 * init_ttf_table(u16 *texture)
     }
 
     return texture;
-
 }
 
 void reset_ttf_frame(void)
@@ -256,20 +247,16 @@ void reset_ttf_frame(void)
     int n;
 
     for(n= 0; n <  MAX_CHARS; n++) {
-        
         ttf_font_datas[n].flags &= 1;
-
     }
 
     r_use++;
-
 }
 
 static void DrawBox_ttf(float x, float y, float z, float w, float h, u32 rgba)
 {
     tiny3d_SetPolygon(TINY3D_QUADS);
     
-   
     tiny3d_VertexPos(x    , y    , z);
     tiny3d_VertexColor(rgba);
 
@@ -285,7 +272,6 @@ static void DrawBox_ttf(float x, float y, float z, float w, float h, u32 rgba)
 static void DrawTextBox_ttf(float x, float y, float z, float w, float h, u32 rgba, float tx, float ty)
 {
     tiny3d_SetPolygon(TINY3D_QUADS);
-    
    
     tiny3d_VertexPos(x    , y    , z);
     tiny3d_VertexColor(rgba);
@@ -303,10 +289,8 @@ static void DrawTextBox_ttf(float x, float y, float z, float w, float h, u32 rgb
     tiny3d_End();
 }
 
-
 #define TTF_UX 30
 #define TTF_UY 24
-
 
 int display_ttf_string(int posx, int posy, const char *string, u32 color, u32 bkcolor, int sw, int sh)
 {
@@ -425,7 +409,6 @@ int display_ttf_string(int posx, int posy, const char *string, u32 color, u32 bk
                 ttf_font_datas[l].height = slot->bitmap.rows;
                 ttf_font_datas[l].width = slot->bitmap.width;
                 ttf_font_datas[l].ttf = ttf_char;
-                
 
                 for(n = 0; n < slot->bitmap.rows; n++) {
                     if(n >= 32) break;
@@ -442,7 +425,6 @@ int display_ttf_string(int posx, int posy, const char *string, u32 color, u32 bk
 
                 ww += slot->bitmap.width;
                 }
-                
             }
         }
 

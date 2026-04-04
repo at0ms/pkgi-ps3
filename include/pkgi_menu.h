@@ -1,8 +1,6 @@
 #pragma once
-
 #include "pkgi_db.h"
 #include "pkgi_dialog.h"
-
 
 typedef enum {
     MenuResultSearch,

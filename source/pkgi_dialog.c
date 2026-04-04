@@ -238,8 +238,8 @@ void pkgi_do_dialog(pkgi_input* input)
 
     if (local_width != 0 && local_height != 0)
     {
-        pkgi_draw_fill_rect_z((VITA_WIDTH - local_width) / 2, (VITA_HEIGHT - local_height) / 2, PKGI_MENU_Z, local_width, local_height, PKGI_COLOR_DIALOG_BACKGROUND);
-        pkgi_draw_rect_z((VITA_WIDTH - local_width) / 2, (VITA_HEIGHT - local_height) / 2, PKGI_MENU_Z, local_width, local_height, PKGI_COLOR_MENU_BORDER);
+        pkgi_draw_fill_rect_z((PS3_WIDTH - local_width) / 2, (PS3_HEIGHT - local_height) / 2, PKGI_MENU_Z, local_width, local_height, PKGI_COLOR_DIALOG_BACKGROUND);
+        pkgi_draw_rect_z((PS3_WIDTH - local_width) / 2, (PS3_HEIGHT - local_height) / 2, PKGI_MENU_Z, local_width, local_height, PKGI_COLOR_MENU_BORDER);
     }
 
     if (local_width != PKGI_DIALOG_WIDTH || local_height != PKGI_DIALOG_HEIGHT)
@@ -249,8 +249,8 @@ void pkgi_do_dialog(pkgi_input* input)
 
     int font_height = pkgi_text_height("M");
 
-    int w = VITA_WIDTH - 2 * PKGI_DIALOG_HMARGIN;
-    int h = VITA_HEIGHT - 2 * PKGI_DIALOG_VMARGIN;
+    int w = PS3_WIDTH - 2 * PKGI_DIALOG_HMARGIN;
+    int h = PS3_HEIGHT - 2 * PKGI_DIALOG_VMARGIN;
 
     if (local_title[0])
     {
@@ -273,7 +273,7 @@ void pkgi_do_dialog(pkgi_input* input)
         }
         else
         {
-            pkgi_draw_text_ttf((VITA_WIDTH - width) / 2, PKGI_DIALOG_VMARGIN + font_height, PKGI_DIALOG_TEXT_Z, color, local_title);
+            pkgi_draw_text_ttf((PS3_WIDTH - width) / 2, PKGI_DIALOG_VMARGIN + font_height, PKGI_DIALOG_TEXT_Z, color, local_title);
         }
     }
 
@@ -281,14 +281,14 @@ void pkgi_do_dialog(pkgi_input* input)
     {
         int extraw = pkgi_text_width(local_extra);
 
-        int availw = VITA_WIDTH - 2 * (PKGI_DIALOG_HMARGIN + PKGI_DIALOG_PADDING) - (extraw ? extraw + 10 : 10);
-        pkgi_clip_set(PKGI_DIALOG_HMARGIN + PKGI_DIALOG_PADDING, VITA_HEIGHT / 2 - font_height - PKGI_DIALOG_PROCESS_BAR_PADDING, availw, font_height + 2);
-        pkgi_draw_text_z(PKGI_DIALOG_HMARGIN + PKGI_DIALOG_PADDING, VITA_HEIGHT / 2 - font_height - PKGI_DIALOG_PROCESS_BAR_PADDING, PKGI_DIALOG_TEXT_Z, PKGI_COLOR_TEXT_DIALOG, local_text);
+        int availw = PS3_WIDTH - 2 * (PKGI_DIALOG_HMARGIN + PKGI_DIALOG_PADDING) - (extraw ? extraw + 10 : 10);
+        pkgi_clip_set(PKGI_DIALOG_HMARGIN + PKGI_DIALOG_PADDING, PS3_HEIGHT / 2 - font_height - PKGI_DIALOG_PROCESS_BAR_PADDING, availw, font_height + 2);
+        pkgi_draw_text_z(PKGI_DIALOG_HMARGIN + PKGI_DIALOG_PADDING, PS3_HEIGHT / 2 - font_height - PKGI_DIALOG_PROCESS_BAR_PADDING, PKGI_DIALOG_TEXT_Z, PKGI_COLOR_TEXT_DIALOG, local_text);
         pkgi_clip_remove();
 
         if (local_extra[0])
         {
-            pkgi_draw_text_z(PKGI_DIALOG_HMARGIN + w - (PKGI_DIALOG_PADDING + extraw), VITA_HEIGHT / 2 - font_height - PKGI_DIALOG_PROCESS_BAR_PADDING, PKGI_DIALOG_TEXT_Z, PKGI_COLOR_TEXT_DIALOG, local_extra);
+            pkgi_draw_text_z(PKGI_DIALOG_HMARGIN + w - (PKGI_DIALOG_PADDING + extraw), PS3_HEIGHT / 2 - font_height - PKGI_DIALOG_PROCESS_BAR_PADDING, PKGI_DIALOG_TEXT_Z, PKGI_COLOR_TEXT_DIALOG, local_extra);
         }
 
         if (local_progress < 0)
@@ -299,31 +299,31 @@ void pkgi_do_dialog(pkgi_input* input)
             uint32_t end = start < PKGI_DIALOG_PROCESS_BAR_CHUNK ? start : start + PKGI_DIALOG_PROCESS_BAR_CHUNK > avail + PKGI_DIALOG_PROCESS_BAR_CHUNK ? avail : start;
             start = start < PKGI_DIALOG_PROCESS_BAR_CHUNK ? 0 : start - PKGI_DIALOG_PROCESS_BAR_CHUNK;
 
-            pkgi_draw_fill_rect_z(PKGI_DIALOG_HMARGIN + PKGI_DIALOG_PADDING, VITA_HEIGHT / 2, PKGI_MENU_Z, avail, PKGI_DIALOG_PROCESS_BAR_HEIGHT, PKGI_COLOR_PROGRESS_BACKGROUND);
-            pkgi_draw_fill_rect_z(PKGI_DIALOG_HMARGIN + PKGI_DIALOG_PADDING + start, VITA_HEIGHT / 2, PKGI_MENU_Z, end - start, PKGI_DIALOG_PROCESS_BAR_HEIGHT, PKGI_COLOR_PROGRESS_BAR);
+            pkgi_draw_fill_rect_z(PKGI_DIALOG_HMARGIN + PKGI_DIALOG_PADDING, PS3_HEIGHT / 2, PKGI_MENU_Z, avail, PKGI_DIALOG_PROCESS_BAR_HEIGHT, PKGI_COLOR_PROGRESS_BACKGROUND);
+            pkgi_draw_fill_rect_z(PKGI_DIALOG_HMARGIN + PKGI_DIALOG_PADDING + start, PS3_HEIGHT / 2, PKGI_MENU_Z, end - start, PKGI_DIALOG_PROCESS_BAR_HEIGHT, PKGI_COLOR_PROGRESS_BAR);
         }
         else
         {
-            pkgi_draw_fill_rect_z(PKGI_DIALOG_HMARGIN + PKGI_DIALOG_PADDING, VITA_HEIGHT / 2, PKGI_MENU_Z, w - 2 * PKGI_DIALOG_PADDING, PKGI_DIALOG_PROCESS_BAR_HEIGHT, PKGI_COLOR_PROGRESS_BACKGROUND);
-            pkgi_draw_fill_rect_z(PKGI_DIALOG_HMARGIN + PKGI_DIALOG_PADDING, VITA_HEIGHT / 2, PKGI_MENU_Z, (int)((w - 2 * PKGI_DIALOG_PADDING) * local_progress), PKGI_DIALOG_PROCESS_BAR_HEIGHT, PKGI_COLOR_PROGRESS_BAR);
+            pkgi_draw_fill_rect_z(PKGI_DIALOG_HMARGIN + PKGI_DIALOG_PADDING, PS3_HEIGHT / 2, PKGI_MENU_Z, w - 2 * PKGI_DIALOG_PADDING, PKGI_DIALOG_PROCESS_BAR_HEIGHT, PKGI_COLOR_PROGRESS_BACKGROUND);
+            pkgi_draw_fill_rect_z(PKGI_DIALOG_HMARGIN + PKGI_DIALOG_PADDING, PS3_HEIGHT / 2, PKGI_MENU_Z, (int)((w - 2 * PKGI_DIALOG_PADDING) * local_progress), PKGI_DIALOG_PROCESS_BAR_HEIGHT, PKGI_COLOR_PROGRESS_BAR);
 
             char percent[256];
             pkgi_snprintf(percent, sizeof(percent), "%.0f%%", local_progress * 100.f);
 
             int percentw = pkgi_text_width(percent);
-            pkgi_draw_text_z((VITA_WIDTH - percentw) / 2, VITA_HEIGHT / 2 + PKGI_DIALOG_PROCESS_BAR_HEIGHT + PKGI_DIALOG_PROCESS_BAR_PADDING, PKGI_DIALOG_TEXT_Z, PKGI_COLOR_TEXT_DIALOG, percent);
+            pkgi_draw_text_z((PS3_WIDTH - percentw) / 2, PS3_HEIGHT / 2 + PKGI_DIALOG_PROCESS_BAR_HEIGHT + PKGI_DIALOG_PROCESS_BAR_PADDING, PKGI_DIALOG_TEXT_Z, PKGI_COLOR_TEXT_DIALOG, percent);
         }
 
         if (local_eta[0])
         {
-            pkgi_draw_text_z(PKGI_DIALOG_HMARGIN + w - (PKGI_DIALOG_PADDING + pkgi_text_width(local_eta)), VITA_HEIGHT / 2 + PKGI_DIALOG_PROCESS_BAR_HEIGHT + PKGI_DIALOG_PROCESS_BAR_PADDING, PKGI_DIALOG_TEXT_Z, PKGI_COLOR_TEXT_DIALOG, local_eta);
+            pkgi_draw_text_z(PKGI_DIALOG_HMARGIN + w - (PKGI_DIALOG_PADDING + pkgi_text_width(local_eta)), PS3_HEIGHT / 2 + PKGI_DIALOG_PROCESS_BAR_HEIGHT + PKGI_DIALOG_PROCESS_BAR_PADDING, PKGI_DIALOG_TEXT_Z, PKGI_COLOR_TEXT_DIALOG, local_eta);
         }
 
         if (local_allow_close)
         {
             char text[256];
             pkgi_snprintf(text, sizeof(text), _("press %s to cancel"), pkgi_ok_button() == PKGI_BUTTON_X ? PKGI_UTF8_O : PKGI_UTF8_X);
-            pkgi_draw_text_z((VITA_WIDTH - pkgi_text_width(text)) / 2, PKGI_DIALOG_VMARGIN + h - 2 * font_height, PKGI_DIALOG_TEXT_Z, PKGI_COLOR_TEXT_DIALOG, text);
+            pkgi_draw_text_z((PS3_WIDTH - pkgi_text_width(text)) / 2, PKGI_DIALOG_VMARGIN + h - 2 * font_height, PKGI_DIALOG_TEXT_Z, PKGI_COLOR_TEXT_DIALOG, text);
         }
     }
     else if (local_type == DialogDetails)
@@ -337,7 +337,7 @@ void pkgi_do_dialog(pkgi_input* input)
         {
             char text[256];
             pkgi_snprintf(text, sizeof(text), _("press %s to close - %s to scan updates"), pkgi_ok_button() == PKGI_BUTTON_X ? PKGI_UTF8_X : PKGI_UTF8_O, PKGI_UTF8_S);
-            pkgi_draw_text_z((VITA_WIDTH - pkgi_text_width(text)) / 2, PKGI_DIALOG_VMARGIN + h - 2 * font_height, PKGI_DIALOG_TEXT_Z, PKGI_COLOR_TEXT_DIALOG, text);
+            pkgi_draw_text_z((PS3_WIDTH - pkgi_text_width(text)) / 2, PKGI_DIALOG_VMARGIN + h - 2 * font_height, PKGI_DIALOG_TEXT_Z, PKGI_COLOR_TEXT_DIALOG, text);
         }
     }
     else
@@ -356,12 +356,12 @@ void pkgi_do_dialog(pkgi_input* input)
         if (textw > w + 2 * PKGI_DIALOG_PADDING)
         {
             pkgi_clip_set(PKGI_DIALOG_HMARGIN + PKGI_DIALOG_PADDING, PKGI_DIALOG_VMARGIN + PKGI_DIALOG_PADDING, w - 2 * PKGI_DIALOG_PADDING, h - 2 * PKGI_DIALOG_PADDING);
-            pkgi_draw_text_z(PKGI_DIALOG_HMARGIN + PKGI_DIALOG_PADDING, VITA_HEIGHT / 2 - font_height / 2, PKGI_DIALOG_TEXT_Z, color, local_text);
+            pkgi_draw_text_z(PKGI_DIALOG_HMARGIN + PKGI_DIALOG_PADDING, PS3_HEIGHT / 2 - font_height / 2, PKGI_DIALOG_TEXT_Z, color, local_text);
             pkgi_clip_remove();
         }
         else
         {
-            pkgi_draw_text_z((VITA_WIDTH - textw) / 2, VITA_HEIGHT / 2 - font_height / 2, PKGI_DIALOG_TEXT_Z, color, local_text);
+            pkgi_draw_text_z((PS3_WIDTH - textw) / 2, PS3_HEIGHT / 2 - font_height / 2, PKGI_DIALOG_TEXT_Z, color, local_text);
         }
 
         if (local_allow_close)
@@ -372,7 +372,7 @@ void pkgi_do_dialog(pkgi_input* input)
             else
                 pkgi_snprintf(text, sizeof(text), _("press %s to close"), pkgi_ok_button() == PKGI_BUTTON_X ? PKGI_UTF8_X : PKGI_UTF8_O);
 
-            pkgi_draw_text_z((VITA_WIDTH - pkgi_text_width(text)) / 2, PKGI_DIALOG_VMARGIN + h - 2 * font_height, PKGI_DIALOG_TEXT_Z, PKGI_COLOR_TEXT_DIALOG, text);
+            pkgi_draw_text_z((PS3_WIDTH - pkgi_text_width(text)) / 2, PKGI_DIALOG_VMARGIN + h - 2 * font_height, PKGI_DIALOG_TEXT_Z, PKGI_COLOR_TEXT_DIALOG, text);
         }
     }
 }

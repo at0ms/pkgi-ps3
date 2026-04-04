@@ -7,7 +7,6 @@
  * but WITHOUT ANY WARRENTY; without event the implied warrenty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
-
 #include <limits.h>
 #include <stdlib.h>
 #include <mikmod.h>
@@ -134,4 +133,3 @@ static long My_MemReader_Tell(MREADER* reader)
 	}
 	return 0;
 }
-

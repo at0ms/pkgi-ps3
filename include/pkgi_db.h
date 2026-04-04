@@ -1,5 +1,4 @@
 #pragma once
-
 #include <stdint.h>
 
 #define MAX_CONTENT_TYPES 10

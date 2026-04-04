@@ -26,7 +26,6 @@
 #include <mikmod.h>
 #include "mikmod_loader.h"
 
-
 #define OSKDIALOG_FINISHED          0x503
 #define OSKDIALOG_UNLOADED          0x504
 #define OSKDIALOG_INPUT_ENTERED     0x505
@@ -43,7 +42,6 @@
 #define ANALOG_MAX          (ANALOG_CENTER + ANALOG_THRESHOLD)
 
 #define PKGI_USER_AGENT "Mozilla/5.0 (PLAYSTATION 3; 1.00)"
-
 
 struct pkgi_http
 {
@@ -64,7 +62,6 @@ typedef struct
     char *memory;
     size_t size;
 } curl_memory_t;
-
 
 static sys_mutex_t g_dialog_lock;
 static uint32_t cpu_temp_c[2];
@@ -93,7 +90,6 @@ static t_tex_buttons tex_buttons;
 
 static MREADER *mem_reader;
 static MODULE *module;
-
 
 int pkgi_snprintf(char* buffer, uint32_t size, const char* msg, ...)
 {
@@ -417,7 +413,6 @@ static int convert_from_utf16(const uint16_t* utf16, char* utf8, uint32_t size)
     return count;
 }
 
-
 static void osk_exit(void)
 {
     if(osk_level == 2) {
@@ -459,7 +454,6 @@ static void osk_event_handle(u64 status, u64 param, void * userdata)
             break;
     }
 }
-
 
 void pkgi_dialog_input_text(const char* title, const char* text)
 {
@@ -1000,7 +994,7 @@ void pkgi_draw_texture(pkgi_texture texture, int x, int y)
 
 void pkgi_draw_background(pkgi_texture texture)
 {
-    ya2d_drawTextureEx((ya2d_Texture*) texture, 0, 0, YA2D_DEFAULT_Z, VITA_WIDTH, VITA_HEIGHT);
+    ya2d_drawTextureEx((ya2d_Texture*) texture, 0, 0, YA2D_DEFAULT_Z, PS3_WIDTH, PS3_HEIGHT);
 }
 
 void pkgi_draw_texture_z(pkgi_texture texture, int x, int y, int z, float scale)
@@ -1013,7 +1007,6 @@ void pkgi_free_texture(pkgi_texture texture)
     ya2d_freeTexture((ya2d_Texture*) texture);
 }
 
-
 void pkgi_clip_set(int x, int y, int w, int h)
 {
     set_ttf_window(x, y, w, h*2, 0);
@@ -1021,7 +1014,7 @@ void pkgi_clip_set(int x, int y, int w, int h)
 
 void pkgi_clip_remove(void)
 {
-    set_ttf_window(0, 0, VITA_WIDTH, VITA_HEIGHT, 0);
+    set_ttf_window(0, 0, PS3_WIDTH, PS3_HEIGHT, 0);
 }
 
 void pkgi_draw_fill_rect(int x, int y, int w, int h, uint32_t color)
@@ -1083,7 +1076,6 @@ void pkgi_draw_text_z(int x, int y, int z, uint32_t color, const char* text)
     }    
 }
 
-
 void pkgi_draw_text_ttf(int x, int y, int z, uint32_t color, const char* text)
 {
     Z_ttf = z;
@@ -1096,7 +1088,6 @@ int pkgi_text_width_ttf(const char* text)
     return (display_ttf_string(0, 0, text, 0, 0, PKGI_FONT_WIDTH+6, PKGI_FONT_HEIGHT+2));
 }
 
-
 void pkgi_draw_text(int x, int y, uint32_t color, const char* text)
 {
     SetFontColor(RGBA_COLOR(PKGI_COLOR_TEXT_SHADOW, 128), 0);
@@ -1105,7 +1096,6 @@ void pkgi_draw_text(int x, int y, uint32_t color, const char* text)
     SetFontColor(RGBA_COLOR(color, 200), 0);
     DrawString((float)x, (float)y, (char *)text);
 }
-
 
 int pkgi_text_width(const char* text)
 {

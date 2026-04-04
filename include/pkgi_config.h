@@ -1,5 +1,4 @@
 #pragma once
-
 #include "pkgi_db.h"
 
 void pkgi_load_config(Config* config, char* update_url, uint32_t update_len);
