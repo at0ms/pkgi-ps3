@@ -10,7 +10,6 @@ The `pkgi` homebrew app allows to download and install `.pkg` files directly on 
 # What makes this fork standout?
 * New icon, background image and hover image that is consistent.
 * Improved hud elements (Main scroll bar is now centered correctly with text).
-* Includes default link to homebrew apps and more (Coming soon)
 
 # Features
 
