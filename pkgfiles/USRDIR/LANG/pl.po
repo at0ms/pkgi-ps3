@@ -163,8 +163,8 @@ msgid "Exit"
 msgstr "Wyjdz"
 
 #: pkgi.c:678
-msgid "Successfully downloaded PKGi PS3 update"
-msgstr "Pomyslnie pobrano aktualizacje PKGi PS3"
+msgid "Successfully downloaded PKGi update"
+msgstr "Pomyslnie pobrano aktualizacje PKGi"
 
 #: pkgi.c:1051
 msgid "Search"

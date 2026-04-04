@@ -163,8 +163,8 @@ msgid "Exit"
 msgstr "退出"
 
 #: pkgi.c:678
-msgid "Successfully downloaded PKGi PS3 update"
-msgstr "下載PKGi PS3更新成功"
+msgid "Successfully downloaded PKGi update"
+msgstr "下載PKGi更新成功"
 
 #: pkgi.c:1051
 msgid "Search"

@@ -2,9 +2,16 @@
 
 All notable changes to the `pkgi-ps3` project will be documented in this file. This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]()
+## [v1.4.0](https://github.com/at0ms/pkgi-ps3/releases/tag/v1.4.0) - 2026-04-03
 
----
+### Added
+* Added app hover background image
+
+### Misc
+* Updated app icon
+* Updated in-app background
+* Improved GUI
+* Changed `PKGi PS3` to `PKGi` in source files and sfo generation
 
 ## [v1.3.0](https://github.com/bucanero/pkgi-ps3/releases/tag/v1.3.0) - 2025-12-20
 

@@ -541,7 +541,7 @@ static void pkgi_do_head(void)
     char battery[256];
     pkgi_snprintf(battery, sizeof(battery), "CPU: %u""\xf8""C RSX: %u""\xf8""C", pkgi_get_temperature(0), pkgi_get_temperature(1));
 
-    uint32_t color = pkgi_temperature_is_high() ? PKGI_COLOR_BATTERY_LOW : PKGI_COLOR_BATTERY_CHARGING;
+    uint32_t color = pkgi_temperature_is_high() ? PKGI_COLOR_TEMP_HIGH : PKGI_COLOR_TEMP_NORMAL;
     int rightw = pkgi_text_width(battery);
     pkgi_draw_text(VITA_WIDTH - PKGI_MAIN_HLINE_EXTRA - (rightw + PKGI_MAIN_HMARGIN), PKGI_MAIN_VMARGIN, color, battery);
 
