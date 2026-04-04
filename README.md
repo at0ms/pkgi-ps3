@@ -1,11 +1,16 @@
-# PKGi PS3
+# PKGi
 
 [![Downloads][img_downloads]][pkgi_downloads] [![Release][img_latest]][pkgi_latest] [![License][img_license]][pkgi_license]
 [![Build package](https://github.com/at0ms/pkgi-ps3/actions/workflows/build.yml/badge.svg)](https://github.com/at0ms/pkgi-ps3/actions/workflows/build.yml)
 
-This is a **fork** of **PKGi PS3** that changes/improves come elements like images, pre-included homebrew database and more.
+This is a **fork** of **PKGi PS3**
 
-The `pkgi-ps3` homebrew app allows to download and install `.pkg` files directly on your PS3.
+The `pkgi` homebrew app allows to download and install `.pkg` files directly on your PS3.
+
+# What makes this fork standout?
+* New icon, background image and hover image that is consistent.
+* Improved hud elements (Main scroll bar is now centered correctly with text).
+* Includes default link to homebrew apps and more (Coming soon)
 
 # Features
 
