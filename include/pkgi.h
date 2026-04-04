@@ -13,15 +13,15 @@
 #define PKGI_BUTTON_DOWN   0x00400000
 #define PKGI_BUTTON_LEFT   0x00800000
 
-#define PKGI_BUTTON_LT     0x00000004 // L1
-#define PKGI_BUTTON_RT     0x00000008 // R1
+#define PKGI_BUTTON_L1     0x00000004
+#define PKGI_BUTTON_R1     0x00000008
 #define PKGI_BUTTON_L2     0x00000001
 #define PKGI_BUTTON_R2     0x00000002
 
-#define PKGI_BUTTON_X 0x00000040 // cross
-#define PKGI_BUTTON_O 0x00000020 // circle
-#define PKGI_BUTTON_T 0x00000010 // triangle
-#define PKGI_BUTTON_S 0x00000080 // square
+#define PKGI_BUTTON_X 0x00000040 // Cross
+#define PKGI_BUTTON_O 0x00000020 // Circle
+#define PKGI_BUTTON_T 0x00000010 // Triangle
+#define PKGI_BUTTON_S 0x00000080 // Square
 
 #define PKGI_UNUSED(x) (void)(x)
 
@@ -109,11 +109,11 @@ int pkgi_mkdirs(const char* path);
 void pkgi_rm(const char* file);
 int64_t pkgi_get_size(const char* path);
 
-// creates file (if it exists, truncates size to 0)
+// Creates file (if it exists, truncates size to 0).
 void* pkgi_create(const char* path);
-// open existing file in read mode, fails if file does not exist
+// Open existing file in read mode, fails if file does not exist.
 void* pkgi_open(const char* path);
-// open file for writing, next write will append data to end of it
+// Open file for writing, next write will append data to end of it.
 void* pkgi_append(const char* path);
 
 void pkgi_close(void* f);

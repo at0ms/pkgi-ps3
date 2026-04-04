@@ -323,7 +323,7 @@ static int convert_to_utf16(const char* utf8, uint16_t* utf16, uint32_t availabl
         }
         else
         {
-            // TODO: this assumes there won't be invalid utf8 codepoints
+            // TODO: this assumes there won't be invalid utf8 codepoints.
             code = ch & 7;
             extra = 3;
         }
@@ -675,7 +675,7 @@ void pkgi_start(void)
 
     init_music();
 
-    // register exit callback
+    // Register exit callback.
     sysUtilRegisterCallback(SYSUTIL_EVENT_SLOT0, sys_callback, NULL);
 
     g_time = pkgi_time_msec();
@@ -1224,11 +1224,11 @@ int pkgi_http_content_size(const char* url, int64_t* length)
 
     pkgi_curl_init(curl);
     curl_easy_setopt(curl, CURLOPT_URL, url);
-    // do the download request without getting the body
+    // Do the download request without getting the body.
     curl_easy_setopt(curl, CURLOPT_NOBODY, 1L);
     curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 1L);
 
-    // Perform the request
+    // Perform the request.
     res = curl_easy_perform(curl);
     if(res != CURLE_OK)
     {
@@ -1252,20 +1252,20 @@ int pkgi_http_read(pkgi_http* http, void* write_func, void* xferinfo_func)
     CURLcode res;
 
     curl_easy_setopt(http->curl, CURLOPT_NOBODY, 0L);
-    // The function that will be used to write the data
+    // The function that will be used to write the data.
     curl_easy_setopt(http->curl, CURLOPT_WRITEFUNCTION, write_func);
-    // The data file descriptor which will be written to
+    // The data file descriptor which will be written to.
     curl_easy_setopt(http->curl, CURLOPT_WRITEDATA, NULL);
 
     if (xferinfo_func)
     {
-        /* pass the struct pointer into the xferinfo function */
+        /* Pass the struct pointer into the xferinfo function. */
         curl_easy_setopt(http->curl, CURLOPT_XFERINFOFUNCTION, xferinfo_func);
         curl_easy_setopt(http->curl, CURLOPT_XFERINFODATA, NULL);
         curl_easy_setopt(http->curl, CURLOPT_NOPROGRESS, 0L);
     }
 
-    // Perform the request
+    // Perform the request.
     res = curl_easy_perform(http->curl);
 
     if(res != CURLE_OK)
@@ -1439,7 +1439,7 @@ static size_t curl_write_memory(void *contents, size_t size, size_t nmemb, void 
     char *ptr = realloc(mem->memory, mem->size + realsize + 1);
     if(!ptr)
     {
-        /* out of memory! */
+        /* Out of memory! */
         LOG("not enough memory (realloc)");
         return 0;
     }
@@ -1465,18 +1465,18 @@ char * pkgi_http_download_buffer(const char* url, uint32_t* buf_size)
         return NULL;
     }
     
-    chunk.memory = malloc(1);   /* will be grown as needed by the realloc above */
-    chunk.size = 0;             /* no data at this point */
+    chunk.memory = malloc(1);   /* Will be grown as needed by the realloc above. */
+    chunk.size = 0;             /* No data at this point. */
 
     pkgi_curl_init(curl);
     curl_easy_setopt(curl, CURLOPT_URL, url);
     curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 1L);
-    // The function that will be used to write the data
+    // The function that will be used to write the data.
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, curl_write_memory);
-    // The data file descriptor which will be written to
+    // The data file descriptor which will be written to.
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&chunk);
 
-    // Perform the request
+    // Perform the request.
     res = curl_easy_perform(curl);
 
     if(res != CURLE_OK)
@@ -1488,7 +1488,7 @@ char * pkgi_http_download_buffer(const char* url, uint32_t* buf_size)
     }
 
     LOG("%lu bytes retrieved", (unsigned long)chunk.size);
-    // clean-up
+    // Clean-up.
     curl_easy_cleanup(curl);
 
     *buf_size = chunk.size;

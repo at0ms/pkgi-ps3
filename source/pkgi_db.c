@@ -152,7 +152,7 @@ int update_database(const char* update_url, const char* path, char* error, uint3
     pkgi_http* http = pkgi_http_get(update_url, 0);
     if (!http)
     {
-        pkgi_snprintf(error, error_size, "%s\n%s", _("failed to download list from"), update_url);
+        pkgi_snprintf(error, error_size, "%s\n%s", _("Failed to download list from"), update_url);
         return 0;
     }
     else
@@ -160,13 +160,13 @@ int update_database(const char* update_url, const char* path, char* error, uint3
         int64_t length;
         if (!pkgi_http_content_size(update_url, &length))
         {
-            pkgi_snprintf(error, error_size, "%s\n%s", _("failed to download list from"), update_url);
+            pkgi_snprintf(error, error_size, "%s\n%s", _("Failed to download list from"), update_url);
         }
         else
         {
             if (length > (int64_t)(MAX_DB_SIZE - 1))
             {
-                pkgi_snprintf(error, error_size, _("list is too large... check for newer pkgi version!"));
+                pkgi_snprintf(error, error_size, _("List is too large... check for newer pkgi version!"));
             }
             else if (length != 0)
             {
@@ -175,14 +175,14 @@ int update_database(const char* update_url, const char* path, char* error, uint3
 
                 if (!pkgi_http_read(http, &write_update_data, NULL))
                 {
-                    pkgi_snprintf(error, error_size, "%s", _("HTTP download error"));
+                    pkgi_snprintf(error, error_size, "%s", _("HTTP download error."));
                     db_size = 0;
                 }
             }
 
             if (error[0] == 0 && db_size == 0)
             {
-                pkgi_snprintf(error, error_size, _("list is empty... check the DB server"));
+                pkgi_snprintf(error, error_size, _("List is empty... check the DB server."));
             }
         }
 
@@ -308,7 +308,7 @@ static int load_database(uint8_t db_id)
         if (column == dbf.total_columns && pkgi_validate_url(dbf.data[ColumnUrl].data))
         {
             uint32_t ctype = (uint32_t)pkgi_strtoll(dbf.data[ColumnContentType].data);
-            // contentid can't be empty, let's generate one
+            // Contentid can't be empty, let's generate one.
             db[db_count].content = (dbf.data[ColumnContentId].data[0] == 0 ? generate_contentid() : dbf.data[ColumnContentId].data);
             db[db_count].type = pkgi_get_content_type(ctype == 0 ? db_id : ctype);
             db[db_count].name = dbf.data[ColumnName].data;
@@ -377,7 +377,7 @@ int pkgi_db_reload(char* error, uint32_t error_size)
 
     if (!db_data && (db_data = malloc(MAX_DB_SIZE)) == NULL)
     {
-        pkgi_snprintf(error, error_size, "failed to allocate memory for database");
+        pkgi_snprintf(error, error_size, "Failed to allocate memory for database.");
         return 0;
     }
 
@@ -542,7 +542,7 @@ void pkgi_db_configure(const char* search, const Config* config)
         uint32_t high = search_count - 1;
         while (low <= high)
         {
-            // this never overflows because of MAX_DB_ITEMS
+            // This never overflows because of MAX_DB_ITEMS.
             uint32_t middle = (low + high) / 2;
 
             GameRegion region = pkgi_get_region(db_item[middle]->content);

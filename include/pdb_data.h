@@ -92,7 +92,6 @@ const unsigned char other_d0end_data[52] = {
 };
 
 // ICON_FILE (PNG data)
-
 extern const uint8_t ICONFILE_png[];
 extern const uint32_t ICONFILE_png_size;
 

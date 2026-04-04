@@ -58,7 +58,7 @@ static uint32_t get_task_dir_id(const char* dir, uint32_t tid)
 	    pkgi_snprintf(path, sizeof(path), "%s/%d", dir, tid);
 
         if ((stat(path, &sb) == 0) && S_ISDIR(sb.st_mode)) {
-	    	// there is already a directory with the ID, try again...
+	    	// There is already a directory with the ID, try again...
 		    tid++;
 		} else {
 		    found = 1;
@@ -87,7 +87,7 @@ static void write_pdb_int64(void* fp, const char* header, const uint64_t pdb_u64
 
 static int create_queue_pdb_files(void)
 {
-	// Create files	
+	// Create files.
 	char srcFile[256];
 	char szIconFile[256];
 	
@@ -574,7 +574,7 @@ static int create_rif(const char* contentid, const uint8_t* rap)
 
     if (!lic_path)
     {
-    	LOG("Skipping %s.rif: no act.dat file found", contentid);
+    	LOG("Skipping %s.rif: no act.dat file found.", contentid);
     	return 1;
     }
 

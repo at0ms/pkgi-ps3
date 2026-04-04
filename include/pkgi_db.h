@@ -28,7 +28,7 @@ typedef enum {
     DbFilterRegionJPN = 0x04,
     DbFilterRegionUSA = 0x08,
 
-    // TODO: implement these two
+    // TODO: Implement these two
     DbFilterInstalled = 0x10,
     DbFilterMissing   = 0x20,
 

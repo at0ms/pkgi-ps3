@@ -7,6 +7,7 @@ static char* skipnonws(char* text, char* end)
     {
         text++;
     }
+
     return text;
 }
 
@@ -16,6 +17,7 @@ static char* skipws(char* text, char* end)
     {
         text++;
     }
+    
     return text;
 }
 

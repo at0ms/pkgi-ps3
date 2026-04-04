@@ -106,7 +106,7 @@ static void pkgi_download_thread(void)
 
     LOG("download thread start");
 
-    // short delay to allow download dialog to animate smoothly
+    // Short delay to allow download dialog to animate smoothly.
     pkgi_sleep(300);
 
     pkgi_lock_process();
@@ -182,7 +182,7 @@ int pkgi_check_free_space(uint64_t size)
     if (size > free + 1024 * 1024)
     {
         char error[256];
-        pkgi_snprintf(error, sizeof(error), _("Pkg requires %u %s free space, but only %u %s available"),
+        pkgi_snprintf(error, sizeof(error), _("PKG requires %u %s free space, but only %u %s available."),
             friendly_size(size), friendly_size_str(size),
             friendly_size(free), friendly_size_str(free)
         );
@@ -342,7 +342,7 @@ static void pkgi_do_main(pkgi_input* input)
             }
         }
         
-        if (input->active & PKGI_BUTTON_LT)
+        if (input->active & PKGI_BUTTON_L1)
         {
             uint32_t max_items = avail_height / (font_height + PKGI_MAIN_ROW_PADDING) - 1;
             if (first_item < max_items)
@@ -363,7 +363,7 @@ static void pkgi_do_main(pkgi_input* input)
             }
         }
 
-        if (input->active & PKGI_BUTTON_RT)
+        if (input->active & PKGI_BUTTON_R1)
         {
             uint32_t max_items = avail_height / (font_height + PKGI_MAIN_ROW_PADDING) - 1;
             if (first_item + max_items < db_count - 1)
@@ -453,7 +453,7 @@ static void pkgi_do_main(pkgi_input* input)
         pkgi_draw_text((PS3_WIDTH - w) / 2, PS3_HEIGHT / 2, PKGI_COLOR_TEXT, text);
     }
 
-    // scroll-bar
+    // Scroll-bar.
     if (db_count != 0)
     {
         uint32_t max_items = (avail_height + font_height + PKGI_MAIN_ROW_PADDING - 1) / (font_height + PKGI_MAIN_ROW_PADDING) - 1;
@@ -538,12 +538,12 @@ static void pkgi_do_head(void)
 
     pkgi_draw_fill_rect(0, font_height + PKGI_MAIN_VMARGIN, PS3_WIDTH, PKGI_MAIN_HLINE_HEIGHT, PKGI_COLOR_HLINE);
 
-    char battery[256];
-    pkgi_snprintf(battery, sizeof(battery), "CPU: %u""\xf8""C RSX: %u""\xf8""C", pkgi_get_temperature(0), pkgi_get_temperature(1));
+    char sys_temp[256];
+    pkgi_snprintf(sys_temp, sizeof(sys_temp), "CPU: %u""\xf8""C RSX: %u""\xf8""C", pkgi_get_temperature(0), pkgi_get_temperature(1));
 
     uint32_t color = pkgi_temperature_is_high() ? PKGI_COLOR_TEMP_HIGH : PKGI_COLOR_TEMP_NORMAL;
-    int rightw = pkgi_text_width(battery);
-    pkgi_draw_text(PS3_WIDTH - PKGI_MAIN_HLINE_EXTRA - (rightw + PKGI_MAIN_HMARGIN), PKGI_MAIN_VMARGIN, color, battery);
+    int rightw = pkgi_text_width(sys_temp);
+    pkgi_draw_text(PS3_WIDTH - PKGI_MAIN_HLINE_EXTRA - (rightw + PKGI_MAIN_HMARGIN), PKGI_MAIN_VMARGIN, color, sys_temp);
 
     if (search_active)
     {
@@ -743,7 +743,7 @@ int main(int argc, const char* argv[])
         {
         case StateError:
             pkgi_do_error();
-            // leave the menu open if there's no database and we have URLs available
+            // Leave the menu open if there's no database and we have URLs available.
             if (!pkgi_menu_is_open() && config.allow_refresh)
             {
                 config_temp = config;
@@ -760,7 +760,7 @@ int main(int argc, const char* argv[])
             break;
 
         default:
-            // never happens, just to shut up the compiler
+            // Never happens, just to shut up the compiler
             break;
         }
 

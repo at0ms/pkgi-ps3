@@ -6,10 +6,10 @@
 #define MDIALOG_YESNO   1 
 
 typedef struct pkgi_input {
-    uint64_t delta;   // microseconds from previous frame
-    uint32_t pressed; // button pressed in last frame
-    uint32_t down;    // button is currently down
-    uint32_t active;  // button is pressed in last frame, or held down for a long time (10 frames)
+    uint64_t delta;   // Microseconds from previous frame.
+    uint32_t pressed; // Button pressed in last frame.
+    uint32_t down;    // Button is currently down.
+    uint32_t active;  // Button is pressed in last frame, or held down for a long time (10 frames).
 } pkgi_input;
 
 typedef void (*pkgi_dialog_callback_t)(int);

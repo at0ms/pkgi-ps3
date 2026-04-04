@@ -172,7 +172,7 @@ void pkgi_do_dialog(pkgi_input* input)
             int updates = pkgi_db_load_xml_updates(db_item->content, db_item->name);
             if (updates < 0)
             {
-                pkgi_strncpy(dialog_text, sizeof(dialog_text), _("Failed to download the update list"));
+                pkgi_strncpy(dialog_text, sizeof(dialog_text), _("Failed to download the update list."));
                 dialog_type = DialogError;
             }
             else
@@ -322,7 +322,7 @@ void pkgi_do_dialog(pkgi_input* input)
         if (local_allow_close)
         {
             char text[256];
-            pkgi_snprintf(text, sizeof(text), _("press %s to cancel"), pkgi_ok_button() == PKGI_BUTTON_X ? PKGI_UTF8_O : PKGI_UTF8_X);
+            pkgi_snprintf(text, sizeof(text), _("Press %s to cancel."), pkgi_ok_button() == PKGI_BUTTON_X ? PKGI_UTF8_O : PKGI_UTF8_X);
             pkgi_draw_text_z((PS3_WIDTH - pkgi_text_width(text)) / 2, PKGI_DIALOG_VMARGIN + h - 2 * font_height, PKGI_DIALOG_TEXT_Z, PKGI_COLOR_TEXT_DIALOG, text);
         }
     }
@@ -336,7 +336,7 @@ void pkgi_do_dialog(pkgi_input* input)
         if (local_allow_close)
         {
             char text[256];
-            pkgi_snprintf(text, sizeof(text), _("press %s to close - %s to scan updates"), pkgi_ok_button() == PKGI_BUTTON_X ? PKGI_UTF8_X : PKGI_UTF8_O, PKGI_UTF8_S);
+            pkgi_snprintf(text, sizeof(text), _("Press %s to close - %s to scan updates."), pkgi_ok_button() == PKGI_BUTTON_X ? PKGI_UTF8_X : PKGI_UTF8_O, PKGI_UTF8_S);
             pkgi_draw_text_z((PS3_WIDTH - pkgi_text_width(text)) / 2, PKGI_DIALOG_VMARGIN + h - 2 * font_height, PKGI_DIALOG_TEXT_Z, PKGI_COLOR_TEXT_DIALOG, text);
         }
     }
@@ -370,7 +370,7 @@ void pkgi_do_dialog(pkgi_input* input)
             if (local_type == DialogOkCancel)
                 pkgi_snprintf(text, sizeof(text), "%s %s  %s %s", pkgi_ok_button() == PKGI_BUTTON_X ? PKGI_UTF8_X : PKGI_UTF8_O, _("Enter"), pkgi_cancel_button() == PKGI_BUTTON_O ? PKGI_UTF8_O : PKGI_UTF8_X, _("Back"));
             else
-                pkgi_snprintf(text, sizeof(text), _("press %s to close"), pkgi_ok_button() == PKGI_BUTTON_X ? PKGI_UTF8_X : PKGI_UTF8_O);
+                pkgi_snprintf(text, sizeof(text), _("Press %s to close."), pkgi_ok_button() == PKGI_BUTTON_X ? PKGI_UTF8_X : PKGI_UTF8_O);
 
             pkgi_draw_text_z((PS3_WIDTH - pkgi_text_width(text)) / 2, PKGI_DIALOG_VMARGIN + h - 2 * font_height, PKGI_DIALOG_TEXT_Z, PKGI_COLOR_TEXT_DIALOG, text);
         }
