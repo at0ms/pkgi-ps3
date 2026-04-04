@@ -83,7 +83,7 @@ void pkgi_dialog_details(DbItem *item, const char* content_type)
         (item->digest ? PKGI_UTF8_CHECK_ON : PKGI_UTF8_CHECK_OFF));
 
     pkgi_dialog_data_init(DialogDetails, item->name, dialog_extra);
-    pkgi_strncpy(dialog_extra, sizeof(dialog_extra), "Description: %s", item->description);
+    pkgi_strncpy(dialog_extra, sizeof(dialog_extra), item->description);
 
     db_item = item;
     pkgi_dialog_unlock();
