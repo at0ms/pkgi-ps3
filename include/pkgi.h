@@ -4,7 +4,7 @@
 #include "pkgi_dialog.h"
 
 #define PKGI_UPDATE_URL     "https://api.github.com/repos/at0ms/pkgi-ps3/releases/latest"
-#define PKGI_VERSION        "1.4.0"
+#define PKGI_VERSION        "1.4.1"
 
 #define PKGI_BUTTON_SELECT 0x00010000
 #define PKGI_BUTTON_START  0x00080000

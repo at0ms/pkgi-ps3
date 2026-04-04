@@ -272,7 +272,7 @@ static void pkgi_do_main(pkgi_input* input)
             input->pressed &= ~PKGI_BUTTON_SELECT;
             pkgi_dialog_message("\xE2\x98\x85  PKGi v" PKGI_VERSION "  \xE2\x98\x85", 
                                     "                    PKGi Fork by at0ms\n\n"
-                                    "               https://github.com/at0ms/pkgi-ps3/");
+                                    "            https://github.com/at0ms/pkgi-ps3/");
         }
 
         if (input->active & PKGI_BUTTON_L2)

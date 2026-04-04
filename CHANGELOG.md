@@ -2,6 +2,15 @@
 
 All notable changes to the `pkgi-ps3` project will be documented in this file. This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.4.1](https://github.com/at0ms/pkgi-ps3/releases/tag/v1.4.0) - 2026-04-03
+
+### Added
+* Added `no_music 1` to `config.txt` by default
+
+### Misc
+* Text elements are more consistent throughout the app
+* Code refactor
+
 ## [v1.4.0](https://github.com/at0ms/pkgi-ps3/releases/tag/v1.4.0) - 2026-04-03
 
 ### Added
